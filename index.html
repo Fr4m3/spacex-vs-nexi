@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceX vs Nexi — IPO, flottante e fondi passivi</title>
+<meta name="description" content="Confronto tra l'IPO di SpaceX (SPCX, giugno 2026) e quella di Nexi (NEXI, 2019): flottante, inclusione negli indici, flussi passivi e outlook a 3 anni.">
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#111a2e; --card:#151f38; --card2:#1b2745;
+    --tx:#e8eefc; --mut:#93a1c8; --acc:#ff5a5a; --acc2:#ff8f5a;
+    --ok:#34d399; --warn:#fbbf24; --bad:#f87171; --line:#26355c;
+    --blue:#5aa5ff; --sky:#38bdf8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:linear-gradient(180deg,var(--bg) 0%,#0d1630 45%,var(--bg) 100%);
+       color:var(--tx); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; min-height:100vh}
+  .wrap{max-width:1120px; margin:0 auto; padding:18px 16px 60px}
+  header{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:18px}
+  .brand{display:flex; align-items:center; gap:10px}
+  .brand .logo{font-size:26px}
+  .brand h1{font-size:21px; font-weight:700; letter-spacing:.3px}
+  .brand small{display:block; color:var(--mut); font-weight:400; font-size:12.5px}
+  .chips{display:flex; gap:8px; flex-wrap:wrap}
+  .chip{background:var(--card); border:1px solid var(--line); border-radius:999px;
+        padding:5px 12px; font-size:12px; color:var(--mut)}
+  .chip b{color:var(--acc)}
+  .pill{display:inline-block; padding:2px 10px; border-radius:999px; font-size:11px; font-weight:600}
+  .pill.spacex{background:rgba(90,165,255,.15); color:var(--blue); border:1px solid rgba(90,165,255,.4)}
+  .pill.nexi{background:rgba(251,191,36,.12); color:var(--warn); border:1px solid rgba(251,191,36,.35)}
+  .pill.warn{background:rgba(248,113,113,.12); color:var(--bad); border:1px solid rgba(248,113,113,.4)}
+
+  .hero{background:linear-gradient(135deg,#12203a 0%,#1b2745 60%,#232c4a 100%);
+        border:1px solid var(--line); border-radius:18px; padding:22px; display:flex;
+        flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between; margin-bottom:18px;
+        box-shadow:0 8px 30px rgba(0,0,0,.35)}
+  .hero .left{display:flex; align-items:center; gap:18px}
+  .hero .big-ico{font-size:52px; line-height:1}
+  .hero .mag{font-size:30px; font-weight:800; line-height:1}
+  .hero .magsmall{font-size:14.5px; color:var(--mut); margin-top:4px}
+  .hero .desc{font-size:16px; margin-top:6px; font-weight:600}
+  .hero .descr-mut{color:var(--mut); font-size:13px}
+  .hero .when{color:var(--acc); font-size:13px; margin-top:4px; font-weight:600}
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; width:100%}
+  .vsbox{background:rgba(255,255,255,.045); border:1px solid var(--line); border-radius:14px; padding:16px 18px}
+  .vsbox.vs1{border-color:rgba(90,165,255,.35)}
+  .vsbox.vs2{border-color:rgba(251,191,36,.3)}
+  .vsbox h3{font-size:17px; font-weight:700; display:flex; align-items:center; gap:8px}
+  .vsbox h3 .t{font-size:11px; color:var(--mut); font-weight:400}
+  .vsbox .price{font-size:30px; font-weight:800; margin:6px 0 2px}
+  .vsbox .price small{font-size:13px; color:var(--mut); font-weight:400}
+  .vsbox .sub{font-size:12.5px; color:var(--mut); margin-bottom:10px}
+  .vsbox table{width:100%; border-collapse:collapse; font-size:12.5px}
+  .vsbox td{padding:4px 0; border-bottom:1px dashed rgba(38,53,92,.7)}
+  .vsbox td:last-child{text-align:right; font-weight:600}
+  .vsbox tr:last-child td{border-bottom:none}
+
+  h2.sec{font-size:19px; margin:28px 0 12px; display:flex; align-items:center; gap:9px}
+  h2.sec .n{background:var(--card2); border:1px solid var(--line); color:var(--acc); font-size:12.5px;
+            width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center}
+  h2.sec small{color:var(--mut); font-weight:400; font-size:12.5px}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:14px}
+  .tablewrap{overflow-x:auto}
+  table.data{width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px}
+  table.data th{color:var(--mut); font-size:11.5px; text-transform:uppercase; letter-spacing:.5px;
+                text-align:left; padding:8px 10px; border-bottom:1px solid var(--line)}
+  table.data td{padding:9px 10px; border-bottom:1px solid rgba(38,53,92,.5); vertical-align:top}
+  table.data tr:last-child td{border-bottom:none}
+  table.data td b{color:var(--tx)}
+  table.data td .up{color:var(--ok); font-weight:700}
+  table.data td .dn{color:var(--bad); font-weight:700}
+  .hl{background:rgba(90,165,255,.08)}
+
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:14px}
+  .kpi{background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:13px 15px}
+  .kpi .k{font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.5px}
+  .kpi .v{font-size:20px; font-weight:800; margin-top:4px}
+  .kpi .d{font-size:12px; color:var(--mut); margin-top:3px}
+
+  .chart{background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:14px; margin-top:12px}
+  .chart .cap{font-size:12.5px; color:var(--mut); margin-top:8px; line-height:1.5}
+
+  .tl{position:relative; margin:6px 0 4px; padding-left:26px}
+  .tl::before{content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:var(--line)}
+  .tl .dot{position:absolute; left:3px; top:4px; width:12px; height:12px; border-radius:50%;
+           background:var(--acc); border:3px solid var(--card)}
+  .tl .dot.ok{background:var(--ok)} .tl .dot.chk{background:var(--warn)} .tl .dot.late{background:var(--bad)}
+  .tl h4{font-size:14px}
+  .tl .d{font-size:12px; color:var(--mut); margin:2px 0 10px; line-height:1.5}
+  .tl .tag{font-size:10.5px; font-weight:700; padding:1px 8px; border-radius:999px; margin-left:8px; vertical-align:middle}
+  .tag.fatto{background:rgba(52,211,153,.15); color:var(--ok)}
+  .tag.prog{background:rgba(251,191,36,.12); color:var(--warn)}
+  .tag.att{background:rgba(248,113,113,.12); color:var(--bad)}
+
+  .scen{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px}
+  .scen .s{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; border-top:3px solid var(--mut)}
+  .scen .s.base{border-top-color:var(--blue)} .scen .s.rial{border-top-color:var(--ok)} .scen .s.rib{border-top-color:var(--bad)}
+  .scen .s h4{font-size:15px; margin-bottom:4px}
+  .scen .s .prob{font-size:11.5px; color:var(--mut); margin-bottom:10px}
+  .scen .s p{font-size:13px; line-height:1.6; color:var(--tx)}
+  .scen .s ul{margin:8px 0 0 16px; font-size:12.5px; line-height:1.6; color:var(--mut)}
+
+  .note{font-size:12.5px; color:var(--mut); line-height:1.6}
+  .footer{margin-top:30px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--mut); line-height:1.7}
+  .footer a{color:var(--blue); text-decoration:none}
+  .footer a:hover{text-decoration:underline}
+  .footer .warnbox{border:1px solid rgba(248,113,113,.35); background:rgba(248,113,113,.07);
+                   border-radius:10px; padding:10px 14px; margin-bottom:14px; color:var(--tx)}
+  summary{color:var(--blue); cursor:pointer; font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <span class="logo">🚀</span>
+    <div>
+      <h1>SpaceX vs Nexi — IPO a confronto</h1>
+      <small>Flottante, indici e fondi passivi: cosa aspettarsi nei prossimi 3 anni</small>
+    </div>
+  </div>
+  <div class="chips">
+    <span class="chip">Snapshot: <b>agosto 2026</b></span>
+    <span class="chip">Fonte dati: <b>SEC · Reuters · CNBC · Borsa Italiana · NBER</b></span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="duo">
+    <div class="vsbox vs1">
+      <h3>🚀 SpaceX <span class="t">SPCX · Nasdaq · IPO 12/06/2026</span></h3>
+      <div class="price">$133,27 <small>al 7/08/2026 · cap ~$1,7 trn</small></div>
+      <div class="sub">La più grande IPO della storia: $75 mld raccolti a $135/azione</div>
+      <table>
+        <tr><td>Raccolta IPO</td><td>$75 mld (+$11,25 mld greenshoe)</td></tr>
+        <tr><td>Flottante all'IPO</td><td class="up">~4,3%</td></tr>
+        <tr><td>Votanti (Musk)</td><td>~82,4% dei voti</td></tr>
+        <tr><td>Post-IPO high / low</td><td><span class="up">$225,64</span> / <span class="dn">$104,83</span></td></tr>
+        <tr><td>Ricavi 2025</td><td>$18,7 mld (+43%)</td></tr>
+        <tr><td>Multiplo</td><td>~80-90× vendite</td></tr>
+      </table>
+    </div>
+    <div class="vsbox vs2">
+      <h3>🇮🇹 Nexi <span class="t">NEXI · Borsa Italiana · IPO 16/04/2019</span></h3>
+      <div class="price">€3,94 <small>al 10/07/2026 · cap ~€10 mld</small></div>
+      <div class="sub">La più grande IPO fintech italiana: €2,01 mld raccolti a €9/azione</div>
+      <table>
+        <tr><td>Raccolta IPO</td><td>€2,01 mld (record mondiale 2019)</td></tr>
+        <tr><td>Flottante all'IPO</td><td class="dn">35,6%</td></tr>
+        <tr><td>Valutazione IPO</td><td>€5,7 mld equity / €7,3 mld EV</td></tr>
+        <tr><td>Rendimento dall'IPO</td><td><span class="dn">-57%</span> (da €9 a ~€3,9)</td></tr>
+        <tr><td>Dal picco (2021, ~€19)</td><td><span class="dn">-75/80%</span></td></tr>
+        <tr><td>Oggi</td><td>CDP verso il 30% · OPA CVC valutata (~€9 mld)</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">1</span> I numeri dell'IPO <small>— la lettura chiave</small></h2>
+<div class="card">
+  <div class="tablewrap">
+  <table class="data">
+    <tr><th>Metrica</th><th>SpaceX (SPCX)</th><th>Nexi (NEXI)</th></tr>
+    <tr class="hl"><td><b>Flottante all'IPO</b></td><td><b>~4,3%</b> — 555,5 mln azioni su ~13 mld</td><td><b>35,6%</b> — ~223 mln azioni</td></tr>
+    <tr><td>Prezzo IPO</td><td>$135 fisso (senza range)</td><td>€9,00 (fondo del range 9,0-9,5)</td></tr>
+    <tr><td>Raccolta</td><td>$75 mld + greenshoe → fino a ~$85,7 mld</td><td>€2,01 mld</td></tr>
+    <tr><td>Valutazione</td><td>~$1,75 trn (≈ 2,5× Saudi Aramco 2019)</td><td>€5,7 mld equity · ~4× vendite</td></tr>
+    <tr><td>Struttura di voto</td><td>Dual class (A=1 voto, B=10 voti) · Musk ~82,4%</td><td>Classe unica · ex-PE a ~64%</td></tr>
+    <tr><td>Pressione venditori pre-IPO</td><td>Secondario mag 2026: ask $12,8 mld vs bid $1,3 mld</td><td>—</td></tr>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px"><b>Il dato centrale:</b> SpaceX ha messo in vendita il <b>4,3%</b> della società, Nexi il <b>35,6%</b>. Tutto il resto — volatilità, tempi di inclusione negli indici, ruolo dei passivi — deriva da qui.</p>
+</div>
+
+<h2 class="sec"><span class="n">2</span> Flottante <small>— che cosa cambia per il prezzo</small></h2>
+<div class="card">
+  <div class="chart">
+    <svg viewBox="0 0 700 190" width="100%" role="img" aria-label="Confronto flottante IPO">
+      <!-- bars -->
+      <text x="10" y="30" fill="#93a1c8" font-size="12">SpaceX — 4,3%</text>
+      <rect x="10" y="40" width="104" height="34" rx="6" fill="#5aa5ff"/>
+      <text x="120" y="63" fill="#e8eefc" font-size="13" font-weight="700">~555 mln azioni su ~13 mld</text>
+      <text x="10" y="105" fill="#93a1c8" font-size="12">Nexi — 35,6%</text>
+      <rect x="10" y="115" width="478" height="34" rx="6" fill="#fbbf24"/>
+      <text x="495" y="138" fill="#e8eefc" font-size="13" font-weight="700">~223 mln azioni</text>
+      <text x="10" y="180" fill="#93a1c8" font-size="11">Larghezza proporzionale al flottante — Scala: 1% = ~13,4px</text>
+    </svg>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="kpi"><div class="k">SpaceX — fase "sliver IPO"</div>
+      <div class="v" style="font-size:14.5px">+67% in 2 giorni, poi -53%</div>
+      <div class="d">Ogni flusso conta sul 4,3% di flottante: max $225,64 (16/06), min $104,83 (06/08), giornate da ±6-16% con volumi di 200-250 mln di azioni. Dinamica da thin float + retail + ETF a leva su azione singola. È una fase <b>transitoria</b>.</div>
+    </div>
+    <div class="kpi"><div class="k">Nexi — price discovery piena</div>
+      <div class="v" style="font-size:14.5px">Il mercato giudica tutto e subito</div>
+      <div class="d">Con il 35,6% di flottante ogni revisione dei fondamentali si è tradotta in prezzo: +48% (2019), +42% (2020), poi -22% (2021), <b>-52% (2022)</b>, -31% (2024). Nessun flusso passivo ha fermato il calo dal picco di ~€19.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="font-size:15px; margin-bottom:10px">📅 Lockup &amp; offerta SpaceX (calendario)</h3>
+  <div class="tl">
+    <div class="dot ok"></div>
+    <h4>IPO — 12 giugno 2026 <span class="tag fatto">fatto</span></h4>
+    <div class="d">$135/az., 555,5 mln azioni; il 5% delle azioni è riservato a insider selezionati <b>esenti da lockup</b>. Split 5:1 già avvenuto (maggio 2026).</div>
+  </div>
+  <div class="tl">
+    <div class="dot chk"></div>
+    <h4>Primo earnings + sblocco — agosto 2026 <span class="tag prog">atto</span></h4>
+    <div class="d">~911 mln di azioni (≈ tripla l'offerta IPO) diventano vendibili subito dopo il primo report trimestrale → flottante potenziale verso l'11-12%.</div>
+  </div>
+  <div class="tl">
+    <div class="dot"></div>
+    <h4>Clausola performance non attivata — $175,50 <span class="tag att">non scattata</span></h4>
+    <div class="d">Il rilascio condizionato di 456 mln di azioni era legato a un prezzo &gt; $175,50. Il titolo viaggiava a ~$105: la struttura era costruita per un rally che non c'è stato → l'offerta arriva a prezzi bassi.</div>
+  </div>
+  <div class="tl">
+    <div class="dot late"></div>
+    <h4>Vincoli a 1 anno — giugno 2027</h4>
+    <div class="d">Investitori strategici e pre-IPO iniziano a poter vendere liberamente. Flottante realistico: 12-15% entro fine 2027, oltre il 20% entro il 2029 con le emissioni per il capex AI/Starlink.</div>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">3</span> Fondi passivi <small>— ecosistema USA vs italiano</small></h2>
+<div class="card">
+  <h3 style="font-size:15px; margin-bottom:8px">🛰️ Il calendario di inclusione di SpaceX</h3>
+  <div class="tl">
+    <div class="dot ok"></div>
+    <h4>Nasdaq-100 — 7 luglio 2026 <span class="tag fatto">fatto</span></h4>
+    <div class="d">Nasdaq ha <b>modificato le regole</b> (ingresso dopo 15 giorni di contrattazione) per includerla. QQQ (~$486 mld di AUM) e tutti i tracker NDX comprano. Effetto: acquisti per singole cifre di miliardi di dollari, subito assorbiti.</div>
+  </div>
+  <div class="tl">
+    <div class="dot chk"></div>
+    <h4>Russell / FTSE Russell — 2026-27 <span class="tag prog">fast-entry</span></h4>
+    <div class="d">FTSE Russell ha introdotto una regola di ingresso rapido (5 giorni) per i mega-IPO USA: ingresso negli indici Russell durante le ricostituzioni 2026-27.</div>
+  </div>
+  <div class="tl">
+    <div class="dot late"></div>
+    <h4>S&amp;P 500 — non prima di ~metà 2027 <span class="tag att">in attesa</span></h4>
+    <div class="d">Regole ribadite a giugno 2026: <b>12 mesi di quotazione + profittabilità GAAP + flottante ≥10%</b>. SpaceX all'IPO non ne rispetta nessuna. È l'evento grosso: peso stimabile 0,4-1% di un indice con <b>migliaia di miliardi</b> di asset benchmarked (solo IVV ≈ $700 mld).</div>
+  </div>
+  <div class="tl">
+    <div class="dot late"></div>
+    <h4>MSCI — 2027-28 <span class="tag att">in attesa</span></h4>
+    <div class="d">Indici standard richiedono flottante minimo ~15%: l'ingresso avviene quando il flottante cresce oltre la soglia.</div>
+  </div>
+  <p class="note" style="margin-top:12px"><b>Il meccanismo chiave:</b> negli indici a flottante corretto (S&amp;P, MSCI, FTSE, NDX) <b>il peso del titolo cresce quando cresce il flottante</b>. Ogni fine di lockup non è solo offerta: è anche un futuro aumento di peso e di domanda passiva obbligata. Stima dell'ordine di grandezza: <b>decine — forse un centinaio — di miliardi di $ di acquisti passivi cumulati nel 2026-2028</b> (NDX + Russell + S&amp;P 500 + MSCI), assorbiti a tappe.</p>
+</div>
+
+<div class="card">
+  <h3 style="font-size:15px; margin-bottom:8px">⚠️ Ma l'"effetto indice" si è ridotto</h3>
+  <div class="grid2">
+    <div class="kpi"><div class="k">Index effect S&amp;P 500 (annuncio di inclusione)</div>
+      <div class="v">+7,6% → <span class="up">~0,8%</span></div>
+      <div class="d">Anni '90 → ultimo decennio (NBER, S&amp;P DJI). I fondi indice comprano gradualmente nelle settimane attorno all'effettivo, non all'annuncio. I passivi <b>danno liquidità e smorzano la volatilità, non creano rendimento</b>.</div>
+    </div>
+    <div class="kpi"><div class="k">Effetto a lungo termine dell'inclusione</div>
+      <div class="v" style="color:var(--bad)">negativo / nullo</div>
+      <div class="d">Gli studi sull'appartenenza a lungo termine all'indice mostrano impatti negativi (peggioramento della price informativeness, cambi di governance e payout). L'inclusione è una tantum, non un motore di CAGR.</div>
+    </div>
+  </div>
+  <div style="margin-top:14px">
+    <h3 style="font-size:15px; margin-bottom:8px">🇮🇹 Nexi: un ecosistema passivo minuscolo</h3>
+    <p class="note">FTSE Global fast-entry dal <b>24 aprile 2019</b> (8 giorni dopo la quotazione); <b>FTSE MIB dal 24 giugno 2019</b> (peso iniziale ~4,6%, al posto di Banca Generali — il titolo tornò sopra €9 sull'annuncio). Ma i passivi che replicano il FTSE MIB (iShares, Amundi, Lyxor…) valgono in tutto <b>pochi miliardi</b>: l'ingresso ha generato flussi di decine/centinaia di milioni, un rumore di fondo. E il vantaggio si è rovesciato: il flottante di Nexi <b>si è chiuso</b> (CDP 19,1% → ~30% per bloccare l'OPA di CVC da ~€9 mld, con obiettivo delisting) — scenario in cui i passivi vendono a sconto o restano intrappolati.</p>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">4</span> Nexi in 3 anni <small>— l'esperimento che è già finito</small></h2>
+<div class="card">
+  <div class="chart">
+    <svg viewBox="0 0 700 260" width="100%" role="img" aria-label="Rendimenti annui Nexi">
+      <text x="10" y="22" fill="#e8eefc" font-size="13" font-weight="700">Rendimento annuo Nexi dall'IPO (2019-2026*)</text>
+      <text x="10" y="38" fill="#93a1c8" font-size="11">*YTD al 10/07/2026 — base 0 = prezzo IPO €9</text>
+      <!-- bars: each 60px wide, gap 14, baseline at y=150, scale 1.8px per percent -->
+      <!-- 2019 +48.4 (x=14), 2020 +41.6 (x=88), 2021 -21.6 (x=162), 2022 -51.8 (x=236), 2023 +1.4 (x=310), 2024 -30.7 (x=384), 2025 -6.8 (x=458), 2026 -13.1 (x=532) -->
+      <line x1="10" y1="150" x2="700" y2="150" stroke="#26355c" stroke-width="1"/>
+      <rect x="14"  y="62.9 " width="60" height="87.1" rx="4" fill="#34d399"/>
+      <rect x="88"  y="75.1 " width="60" height="74.9 " rx="4" fill="#34d399"/>
+      <rect x="162" y="150  " width="60" height="38.9 " rx="4" fill="#f87171"/>
+      <rect x="236" y="150  " width="60" height="93.2 " rx="4" fill="#f87171"/>
+      <rect x="310" y="147.5" width="60" height="2.5  " rx="2" fill="#fbbf24"/>
+      <rect x="384" y="150  " width="60" height="55.3 " rx="4" fill="#f87171"/>
+      <rect x="458" y="150  " width="60" height="12.2 " rx="3" fill="#f87171"/>
+      <rect x="532" y="150  " width="60" height="23.6 " rx="4" fill="#f87171"/>
+      <!-- labels -->
+      <text x="24"  y="192" fill="#93a1c8" font-size="11">2019</text>
+      <text x="98"  y="192" fill="#93a1c8" font-size="11">2020</text>
+      <text x="172" y="192" fill="#93a1c8" font-size="11">2021</text>
+      <text x="246" y="192" fill="#93a1c8" font-size="11">2022</text>
+      <text x="318" y="192" fill="#93a1c8" font-size="11">2023</text>
+      <text x="394" y="192" fill="#93a1c8" font-size="11">2024</text>
+      <text x="466" y="192" fill="#93a1c8" font-size="11">2025</text>
+      <text x="538" y="192" fill="#93a1c8" font-size="11">2026*</text>
+      <text x="28"  y="55" fill="#e8eefc" font-size="11.5" font-weight="700">+48,4%</text>
+      <text x="100" y="67" fill="#e8eefc" font-size="11.5" font-weight="700">+41,6%</text>
+      <text x="184" y="224" fill="#e8eefc" font-size="11.5" font-weight="700">-21,6%</text>
+      <text x="258" y="228" fill="#e8eefc" font-size="11.5" font-weight="700">-51,8%</text>
+      <text x="338" y="205" fill="#e8eefc" font-size="11" font-weight="700">+1,4%</text>
+      <text x="406" y="228" fill="#e8eefc" font-size="11.5" font-weight="700">-30,7%</text>
+      <text x="478" y="228" fill="#e8eefc" font-size="11.5" font-weight="700">-6,8%</text>
+      <text x="548" y="228" fill="#e8eefc" font-size="11.5" font-weight="700">-13,1%</text>
+    </svg>
+    <div class="cap">Dalla quotazione a €9 (+48,4% nel primo anno) al massimo di ~€19 nei primi mesi del 2021, poi -75/80% fino a ~€3,9: M&amp;A diluitivo (Nets 2021, SIA 2022), rialzo dei tassi, de-rating del settore fintech e impairment hanno dominato sui fondamentali.</div>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">5</span> SpaceX — il percorso dall'IPO ad oggi</h2>
+<div class="card">
+  <div class="chart">
+    <svg viewBox="0 0 700 240" width="100%" role="img" aria-label="Percorso prezzo SPCX">
+      <text x="10" y="22" fill="#e8eefc" font-size="13" font-weight="700">Prezzo SPCX — IPO $135 (fisso) → oggi (agosto 2026)</text>
+      <!-- area path -->
+      <path d="M40 118 L40 118 L250 40 L250 40 L330 190 L330 190 L470 212 L470 212 L660 120 L660 120 Z"
+            fill="rgba(90,165,255,.12)" stroke="none"/>
+      <polyline points="40,118 250,40 330,190 470,212 660,120"
+                fill="none" stroke="#5aa5ff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- baseline IPO -->
+      <line x1="40" y1="118" x2="660" y2="118" stroke="#26355c" stroke-width="1" stroke-dasharray="4 4"/>
+      <!-- labels -->
+      <circle cx="40"  cy="118" r="4" fill="#38bdf8"/>
+      <text x="30"  y="110" fill="#93a1c8" font-size="11">IPO $135 · 12/06</text>
+      <circle cx="250" cy="40" r="4" fill="#34d399"/>
+      <text x="178" y="32" fill="#34d399" font-size="11.5" font-weight="700">max $225,64 (+67%) · 16/06</text>
+      <circle cx="330" cy="190" r="4" fill="#f87171"/>
+      <text x="262" y="214" fill="#93a1c8" font-size="11">ritorno ~$105 · fine luglio</text>
+      <circle cx="470" cy="212" r="4" fill="#f87171"/>
+      <text x="352" y="234" fill="#f87171" font-size="11.5" font-weight="700">min $104,83 (-22%) · 06/08</text>
+      <circle cx="660" cy="120" r="4" fill="#38bdf8"/>
+      <text x="522" y="160" fill="#e8eefc" font-size="11.5" font-weight="700">$133,27 · 07/08</text>
+      <text x="10" y="240" fill="#93a1c8" font-size="11">Traiettoria illustrativa (non in scala temporale): i punti chiave del primo mese e mezzo di contrattazione. Volatilità giornaliera ±6-16%, volumi 200-250 mln di azioni.</text>
+    </svg>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">6</span> Outlook 3 anni (2026-2029) <small>— scenari, non previsioni</small></h2>
+<div class="scen">
+  <div class="s base">
+    <h4>⚖️ Base (~50%)</h4>
+    <div class="prob">Flottante 4,3% → 12-15% entro fine 2027 · ingresso S&amp;P 500 nel 2027 se profittabilità GAAP e float ≥10%</div>
+    <p>Il flottante cresce con i lockup e le emissioni per il capex AI/Starlink. Inclusioni a tappe (NDX già fatto, Russell e S&amp;P 2027, MSCI 2027-28): decine di miliardi di flussi passivi assorbono gran parte dell'offerta da sblocco.</p>
+    <ul><li>Titolo in range ampio, volatilità ancora alta</li><li>Tendenza laterale / moderatamente positiva</li><li>Le tappe di inclusione vengono prezzate in anticipo</li><li><b>Range 3 anni: -30% / +50%</b></li></ul>
+  </div>
+  <div class="s rial">
+    <h4>🚀 Rialzista (~25%)</h4>
+    <div class="prob">GAAP profittevole 2026-27 + Starlink sopra le attese</div>
+    <p>Ingresso S&amp;P 500 appena possibile (h2 2027) con peso 0,5-1%: decine di miliardi di domanda obbligata, cui si aggiungono gli attivi benchmarked. La narrativa "spazio + AI" regge, il capex data-center in orbita viene finanziato senza diluizione eccessiva.</p>
+    <ul><li>Nuovi massimi sopra $225</li><li>Ma con drawdown intermedi del 30-40%</li><li><b>Range 3 anni: +40 / +80%</b></li></ul>
+  </div>
+  <div class="s rib">
+    <h4>📉 Ribassista (~25%)</h4>
+    <div class="prob">Lockup + vendite insider + diluizione mentre GAAP resta negativo</div>
+    <p>L'offerta da sblocco (911 mln di azioni ad agosto 2026, il resto a giugno 2027) non trova assorbimento a questi multipli; il mercato comprime il titolo verso 40-50× ricavi. L'ingresso S&amp;P 500 slitta al 2028, i passivi non difendono durante i ribassi (comprano solo alle inclusioni).</p>
+    <ul><li>Dinamica opposta e simmetrica a Nexi 2022 (-52%)</li><li>I ribilanciamenti possono amplificare i ribassi</li><li><b>Range 3 anni: -40 / -60%</b></li></ul>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3 style="font-size:15px; margin-bottom:8px">📌 Le 4 lezioni dell'esperimento Nexi</h3>
+  <ol style="font-size:13.5px; line-height:1.9; margin-left:20px; color:var(--tx)">
+    <li><b>L'effetto indice del primo anno esiste</b> (Nexi +48% nel 2019, spinta anche dall'ingresso nel FTSE MIB dopo 2 mesi) — ma non regge contro M&amp;A diluitivo, debito e tassi.</li>
+    <li><b>Flottante alto = giudizio pieno del mercato</b>: quando i fondamentali girano male il titolo scende senza appigli. SpaceX è oggi "protetta" dal flottante sottile, ma entro 1-2 anni sarà un titolo normale.</li>
+    <li><b>Il flottante può anche chiudersi</b> (CDP al 30%, OPA CVC): per i passivi è puro rischio — liquidazione forzata in caso di delisting.</li>
+    <li><b>Il driver a 3 anni è la fondamentale contro la valutazione</b>: a Nexi i passivi non servivano (quotava ~4× vendite); SpaceX quota a ~80-90× e i fondamentali devono crescere fino a riempire il multiplo.</li>
+  </ol>
+</div>
+
+<div class="footer">
+  <div class="warnbox"><b>⚠️ Disclaimer:</b> contenuto di analisi, non consulenza finanziaria. Gli scenari sono ipotesi ragionate, non previsioni. Le cifre dei flussi passivi sono ordini di grandezza stimati e dipendono da regole, prezzi e flottante che possono cambiare.</div>
+  <details>
+    <summary>Fonti principali</summary>
+    <p>SEC — S-1 / 424(b)(4) Space Exploration Technologies (S-1 del 20/05/2026, aggiornato 03/06/2026) · SpaceNews, "SpaceX to raise at least $75 billion in IPO" · Reuters, "SpaceX sets aside 5% of IPO shares, waives lock-up" (01/06/2026) · CNBC, "SpaceX blocked from early US benchmark index entry" (05/06/2026) · Reuters explainer, "Why SpaceX faces a longer wait to join S&P 500" · Nasdaq IR, "SPCX to join Nasdaq-100 from July 7, 2026" · Morningstar, "The SpaceX IPO: How Index Funds Will Adapt" · CNBC, "SpaceX's post-IPO plunge" (03/08/2026) · StockAnalysis, storico prezzi SPCX · MSCI Markets in Motion (secondario pre-IPO) · ValueAddVC / Valutico, valutazioni SpaceX 2023-2026.</p>
+    <p>Nexi — comunicati stampa IPO (12 e 15 aprile 2019) · Borsa Italiana, "Nexi lists on Main Market: largest IPO worldwide 2019" · Reuters, "Nexi prices IPO at €9" · Il Sole 24 Ore / MilanoFinanza, ingresso FTSE MIB (24/06/2019) · Borsa Italiana, statistiche FTSE MIB giugno 2019 · CompaniesMarketCap, storico prezzi NEXI · Reuters, "Nexi buyback €500 mln" (2024) · Reuters / FT / The Paypers, "CVC valuta OPA ~€9 mld; CDP sale verso il 30%" (aprile 2026).</p>
+    <p>Accademia — NBER w30748 "The Disappearing Index Effect" · NBER w27593 (effetti a lungo termine dell'inclusione) · S&amp;P DJI, "What Happened to the Index Effect?"</p>
+  </details>
+  <p style="margin-top:8px">Snapshot al <b>10 agosto 2026</b> · Realizzato con dati pubblici · <a href="https://github.com/Fr4m3/spacex-vs-nexi">Repository GitHub</a></p>
+</div>
+
+</div>
+</body>
+</html>

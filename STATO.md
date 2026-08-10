@@ -1,25 +1,27 @@
-# Stato di lavoro — SpaceX vs Nexi
+# Stato di lavoro — SpaceX vs Nexi (+ Ferrari)
 
 > File di ripristino della sessione. Ultimo aggiornamento: 10 agosto 2026.
 
-## Cosa è stato fatto
+## Fatto
 
-1. **Ricerca completata** (web): dati IPO SpaceX (SPCX, 12/06/2026: $135 fissi, $75 mld raccolti, float 4,3%, cap ~$1,75 trn) e Nexi (NEXI, 16/04/2019: €9, €2,01 mld, float 35,6%); calendario lockup SPCX; regole di inclusione indici (Nasdaq-100 07/07/2026 già fatto, S&P 500 non prima di metà 2027: 12 mesi + GAAP + float ≥10%, MSCI a float ≥15%); rendimenti annui Nexi 2019-2026; OPA CVC ~€9 mld / scudo CDP verso 30%.
-2. **Pagina web creata**: `index.html` (stile dark, CSS + SVG inline, senza dipendenze) con confronto, grafici, timeline inclusioni, scenari 3 anni, fonti e disclaimer.
-3. **Pubblicata su GitHub Pages**: https://fr4m3.github.io/spacex-vs-nexi/ — repo `Fr4m3/spacex-vs-nexi` (public, branch main). Build verificata (HTTP 200).
+1. **Ricerca completata**: IPO SpaceX (SPCX, 12/06/2026: $135 fissi, $75 mld, float 4,3%, cap ~$1,75 trn; oggi ~$130-133) · Nexi (16/04/2019: €9, €2,01 mld, float 35,6%; oggi ~€3,9-4,2, OPA CVC/CDP) · Ferrari (21/10/2015: $52, $893 mln, float 9%; oggi ~$407-412, cap ~$79 mld, float ~64%, MAI in S&P 500 perché olandese).
+2. **Pagina principale** `index.html` (SpaceX vs Nexi): confronti, grafici SVG, timeline inclusioni, calendario eventi SPCX con countdown JS (16-17 ondate di lockup), scenari 3 anni, fonti.
+3. **Pagina Ferrari** `ferrari.html` (SpaceX vs Ferrari): stesso stile, tabelle, grafici (flottante 9→64%, cap annua), confronto indici, lezione finale.
+4. **Aggiornamento automatico**: `.github/workflows/aggiorna-dati.yml` (cron giornaliero 22:00 UTC + manuale) + `.github/scripts/aggiorna_dati.py` (Yahoo Finance) → `dati.json`; le pagine leggono dati.json e aggiornano prezzi/variazioni/countdown. Testato localmente (OK: SPCX 130,3 · NEXI 4,20 · RACE 407,68).
+5. **Pubblicato**: repo `Fr4m3/spacex-vs-nexi` (public, main). Pages: `index.html` + `ferrari.html`.
 
-## Punti fermi (snapshot agosto 2026)
+## Link
 
-- SPCX ~$133,27 (7/08/2026); post-IPO high $225,64 / low $104,83; cap ~$1,5-1,7 trn; float potenziale ~11-12% dopo sblocco di agosto 2026 (911 mln azioni post-primo earnings); clausola $175,50 NON scattata.
-- NEXI ~€3,9; CDP sale verso 30%; CVC ha valutato OPA per delisting; rendimento dall'IPO -57%.
+- https://fr4m3.github.io/spacex-vs-nexi/ (SpaceX vs Nexi)
+- https://fr4m3.github.io/spacex-vs-nexi/ferrari.html (SpaceX vs Ferrari)
 
-## Idee per riprendere (non fatte)
+## In sospeso / idee
 
-- [ ] Calendario aggiornabile degli eventi SPCX (earnings, sblocchi, ribilanciamenti indici) nella pagina
-- [ ] Aggiornamento automatico periodico (workflow o script) di prezzi/fatti nella pagina
-- [ ] Confronto con altro comparatore italiano (Ferrari 2015, Technoprobe 2022, Iveco 2022) su richiesta
-- [ ] Otimizzazione mobile/accessibilità delle tabelle (se serve)
+- [ ] Verificare il primo run del workflow Actions dopo il push (tab Actions → run manuale)
+- [ ] Eventuali correzioni alle date "stima" del calendario (Q3 earnings SPCX ~17/11/2026 da confermare)
+- [ ] Vedere se aggiungere un terzo comparatore o un grafico sparkline 5 giorni
+- [ ] (Fatto) Otimizzazione mobile/accessibilità → rivedere se servono ulteriori ritocchi
 
 ## Come riprendere
 
-Dire semplicemente "riprendiamo": leggere questo file + `index.html`, verificare eventuali aggiornamenti di mercato/regole indici, e proseguire sulle idee sopra.
+Dire "riprendiamo": leggere questo file, controllare l'ultimo run del workflow e `dati.json`, proseguire dalle idee sopra.

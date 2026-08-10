@@ -123,7 +123,9 @@
   </div>
   <div class="chips">
     <span class="chip">Snapshot: <b>agosto 2026</b></span>
+    <span class="chip" id="chipAgg">Ultimo agg.: <b>—</b></span>
     <span class="chip">Fonte dati: <b>SEC · Reuters · CNBC · Borsa Italiana · NBER</b></span>
+    <a class="chip" href="ferrari.html" style="text-decoration:none">Vedi anche: Ferrari vs SpaceX →</a>
   </div>
 </header>
 
@@ -131,7 +133,7 @@
   <div class="duo">
     <div class="vsbox vs1">
       <h3>🚀 SpaceX <span class="t">SPCX · Nasdaq · IPO 12/06/2026</span></h3>
-      <div class="price">$133,27 <small>al 7/08/2026 · cap ~$1,7 trn</small></div>
+      <div class="price"><span id="spcx_prezzo">$133,27</span>&nbsp;<small id="spcx_var"></small> <small>al 7/08/2026 · cap ~$1,7 trn</small></div>
       <div class="sub">La più grande IPO della storia: $75 mld raccolti a $135/azione</div>
       <table>
         <tr><td>Raccolta IPO</td><td>$75 mld (+$11,25 mld greenshoe)</td></tr>
@@ -144,7 +146,7 @@
     </div>
     <div class="vsbox vs2">
       <h3>🇮🇹 Nexi <span class="t">NEXI · Borsa Italiana · IPO 16/04/2019</span></h3>
-      <div class="price">€3,94 <small>al 10/07/2026 · cap ~€10 mld</small></div>
+      <div class="price"><span id="nexi_prezzo">€3,94</span>&nbsp;<small id="nexi_var"></small> <small>al 10/07/2026 · cap ~€10 mld</small></div>
       <div class="sub">La più grande IPO fintech italiana: €2,01 mld raccolti a €9/azione</div>
       <table>
         <tr><td>Raccolta IPO</td><td>€2,01 mld (record mondiale 2019)</td></tr>
@@ -335,7 +337,34 @@
   </div>
 </div>
 
-<h2 class="sec"><span class="n">6</span> Outlook 3 anni (2026-2029) <small>— scenari, non previsioni</small></h2>
+<h2 class="sec"><span class="n">6</span> Calendario eventi SPCX 2026-2027 <small>— countdown auto-aggiornante</small></h2>
+<div class="card">
+  <div class="tablewrap">
+  <table class="data" id="tblEventi">
+    <tr><th>Data</th><th>Evento</th><th>Nota</th><th>Countdown</th></tr>
+    <tr><td><b>12/06/2026</b></td><td>Debutto Nasdaq (SPCX)</td><td>Open $150, intraday max $176,52 (cap &gt; $2,2 trn), close $160,95 (+19,2%), volume 522M</td><td class="ok">fatto</td></tr>
+    <tr><td><b>04/08/2026</b></td><td>Primo earnings (Q2 2026)</td><td>EPS -$0,09 vs attese -$0,16 (beat)</td><td class="ok">fatto</td></tr>
+    <tr><td><b>06/08/2026</b></td><td>Sblocco earnings-linked</td><td>~911,5M di azioni vendibili → flottante potenziale ~11-12%</td><td class="ok">fatto</td></tr>
+    <tr><td><b>20/08/2026</b></td><td>Rilascio programmato (70° giorno)</td><td>Insider possono vendere fino al 7% delle proprie azioni</td><td class="cd" data-date="2026-08-20">—</td></tr>
+    <tr><td><b>09/09/2026</b></td><td>Rilascio programmato (90° giorno)</td><td>Fino al 7% (idem il 10/09, 91° giorno)</td><td class="cd" data-date="2026-09-09">—</td></tr>
+    <tr><td><b>24/09/2026</b></td><td>Rilascio programmato (105° giorno)</td><td>Fino al 7%</td><td class="cd" data-date="2026-09-24">—</td></tr>
+    <tr><td><b>09/10/2026</b></td><td>Rilascio programmato (120° giorno)</td><td>Fino al 7%</td><td class="cd" data-date="2026-10-09">—</td></tr>
+    <tr><td><b>24/10/2026</b></td><td>Rilascio programmato (135° giorno)</td><td>Fino al 7%</td><td class="cd" data-date="2026-10-24">—</td></tr>
+    <tr><td><b>~17/11/2026</b> <span class="pill warn">stima</span></td><td>Earnings Q3 2026</td><td>Data stimata (pattern trimestrale, da confermare)</td><td class="cd" data-date="2026-11-17">—</td></tr>
+    <tr><td><b>~19/11/2026</b> <span class="pill warn">stima</span></td><td>Sblocco Q3 — ~1,3 mld di azioni</td><td>Il rilascio singolo più grande: 28% delle azioni sotto lockup 180 giorni</td><td class="cd" data-date="2026-11-19">—</td></tr>
+    <tr><td><b>08/12/2026</b></td><td>Fine lockup 180 giorni</td><td>Fino a 328,4M azioni (o 797,6M se il tranche Q3 non fosse già stato rilasciato)</td><td class="cd" data-date="2026-12-08">—</td></tr>
+    <tr><td><b>~feb 2027</b> <span class="pill warn">stima</span></td><td>Earnings Q4 2026 + sblocco 351,9M</td><td>20% del lockup esteso</td><td class="cd" data-date="2027-02-18">—</td></tr>
+    <tr><td><b>17/05/2027</b></td><td>Sblocco 176M di azioni</td><td>10% del lockup esteso (escluse le azioni di Musk)</td><td class="cd" data-date="2027-05-17">—</td></tr>
+    <tr><td><b>~mag 2027</b> <span class="pill warn">stima</span></td><td>Earnings Q1 2027 + sblocco 351,9M</td><td>20% del lockup esteso</td><td class="cd" data-date="2027-05-24">—</td></tr>
+    <tr class="hl"><td><b>12/06/2027</b></td><td>Musk vendibile: fino a 6,4 mld di azioni</td><td>Fine dei vincoli a 366 giorni + sblocco 351,9M. In pari data scatta l'eleggibilità S&amp;P 500 (12 mesi di quotazione: servono anche profittabilità GAAP e flottante ≥10%)</td><td class="cd" data-date="2027-06-12">—</td></tr>
+    <tr><td><b>fine giugno 2027</b></td><td>Russell US reconstitution</td><td>Ricostituzione annuale (data esatta da confermare)</td><td class="cd" data-date="2027-06-30">—</td></tr>
+    <tr><td><b>~ago 2027</b> <span class="pill warn">stima</span></td><td>Earnings Q2 2027 + sblocco 351,9M</td><td>Ultimo tranche del 20% del lockup esteso</td><td class="cd" data-date="2027-08-06">—</td></tr>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px">Previsto in totale un calendario a <b>16-17 ondate di sblocco</b> (schema a scaglioni, non 180 giorni unici come nelle IPO tipiche). Le date contrassegnate "stima" si spostano con i report trimestrali: lo sblocco avviene <b>il 2° giorno di contrattazione successivo al report</b>. MSCI: revisioni trimestrali (feb/mag/ago/nov) — ingresso possibile solo quando il flottante raggiunge ~15%.</p>
+</div>
+
+<h2 class="sec"><span class="n">7</span> Outlook 3 anni (2026-2029) <small>— scenari, non previsioni</small></h2>
 <div class="scen">
   <div class="s base">
     <h4>⚖️ Base (~50%)</h4>
@@ -379,5 +408,47 @@
 </div>
 
 </div>
+<script>
+// Prezzi dinamici da dati.json (aggiornato automaticamente dal workflow GitHub Actions)
+(function(){
+  const nfmt = (n, dg=2) => n.toLocaleString('it-IT',{minimumFractionDigits:dg,maximumFractionDigits:dg});
+  const setvar = (id, v) => {
+    const el = document.getElementById(id); if(!el) return;
+    if(v===null||v===undefined){ el.textContent=''; return; }
+    const cls = v>=0 ? 'up' : 'dn';
+    el.className = cls;
+    el.textContent = (v>=0?'+':'') + nfmt(v) + '%';
+  };
+  async function prezzi(){
+    try{
+      const d = await (await fetch('dati.json',{cache:'no-store'})).json();
+      const m = d.aggiornato ? new Date(d.aggiornato) : null;
+      if(m && !isNaN(m)){
+        document.getElementById('chipAgg').innerHTML =
+          'Ultimo agg.: <b>' + m.toLocaleDateString('it-IT') + ' ' + m.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}) + ' UTC</b>';
+      }
+      const s = d.SPCX;  if(s && s.prezzo){ document.getElementById('spcx_prezzo').textContent = '$' + nfmt(s.prezzo); setvar('spcx_var', s.varPct); }
+      const n = d['NEXI.MI']; if(n && n.prezzo){ document.getElementById('nexi_prezzo').textContent = '€' + nfmt(n.prezzo); setvar('nexi_var', n.varPct); }
+      const r = d.RACE;
+      if(r && r.prezzo){
+        const rp = document.getElementById('race_prezzo'); if(rp){ rp.textContent = '$' + nfmt(r.prezzo); setvar('race_var', r.varPct); }
+      }
+    }catch(e){ /* file:// o offline: restano i valori statici */ }
+  }
+  function countdown(){
+    const oggi = new Date(); oggi.setHours(0,0,0,0);
+    const t = oggi.getTime();
+    document.querySelectorAll('.cd[data-date]').forEach(el=>{
+      const d = new Date(el.getAttribute('data-date')+'T00:00:00');
+      const g = Math.round((d.getTime()-t)/86400000);
+      if(g<0) el.innerHTML = '<span class="dn">fatto</span>';
+      else if(g===0) el.innerHTML = '<b>oggi</b>';
+      else if(g===1) el.innerHTML = '<b>domani</b>';
+      else el.innerHTML = '<b>tra ' + g + ' gg</b>';
+    });
+  }
+  prezzi(); countdown();
+})();
+</script>
 </body>
 </html>

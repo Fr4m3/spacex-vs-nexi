@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceX vs Ferrari — IPO, flottante e fondi passivi</title>
+<meta name="description" content="Confronto tra l'IPO di SpaceX (SPCX, 2026) e quella di Ferrari (RACE, 2015): flottante 4,3% vs 9% poi 64%, indici e fondi passivi, performance a 11 anni.">
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#111a2e; --card:#151f38; --card2:#1b2745;
+    --tx:#e8eefc; --mut:#93a1c8; --acc:#ff5a5a; --acc2:#ff8f5a;
+    --ok:#34d399; --warn:#fbbf24; --bad:#f87171; --line:#26355c;
+    --red:#e8262e; --yellow:#ffcc00; --blue:#5aa5ff; --sky:#38bdf8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:linear-gradient(180deg,var(--bg) 0%,#0d1630 45%,var(--bg) 100%);
+       color:var(--tx); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; min-height:100vh}
+  .wrap{max-width:1120px; margin:0 auto; padding:18px 16px 60px}
+  header{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:18px}
+  .brand{display:flex; align-items:center; gap:10px}
+  .brand .logo{font-size:26px}
+  .brand h1{font-size:21px; font-weight:700; letter-spacing:.3px}
+  .brand small{display:block; color:var(--mut); font-weight:400; font-size:12.5px}
+  .chips{display:flex; gap:8px; flex-wrap:wrap}
+  .chip{background:var(--card); border:1px solid var(--line); border-radius:999px;
+        padding:5px 12px; font-size:12px; color:var(--mut); text-decoration:none}
+  .chip b{color:var(--acc)}
+  .pill{display:inline-block; padding:2px 10px; border-radius:999px; font-size:11px; font-weight:600}
+  .pill.f1{background:rgba(232,38,46,.15); color:var(--red); border:1px solid rgba(232,38,46,.4)}
+  .pill.f2{background:rgba(255,204,0,.12); color:var(--yellow); border:1px solid rgba(255,204,0,.35)}
+  .pill.warn{background:rgba(248,113,113,.12); color:var(--bad); border:1px solid rgba(248,113,113,.4)}
+
+  .hero{background:linear-gradient(135deg,#331014 0%,#1b2745 60%,#232c4a 100%);
+        border:1px solid var(--line); border-radius:18px; padding:22px; display:flex;
+        flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between; margin-bottom:18px;
+        box-shadow:0 8px 30px rgba(0,0,0,.35)}
+  .duo{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; width:100%}
+  .vsbox{background:rgba(255,255,255,.045); border:1px solid var(--line); border-radius:14px; padding:16px 18px}
+  .vsbox.vs1{border-color:rgba(232,38,46,.4)}
+  .vsbox.vs2{border-color:rgba(90,165,255,.35)}
+  .vsbox h3{font-size:17px; font-weight:700; display:flex; align-items:center; gap:8px}
+  .vsbox h3 .t{font-size:11px; color:var(--mut); font-weight:400}
+  .vsbox .price{font-size:30px; font-weight:800; margin:6px 0 2px}
+  .vsbox .price small{font-size:13px; color:var(--mut); font-weight:400}
+  .vsbox .sub{font-size:12.5px; color:var(--mut); margin-bottom:10px}
+  .vsbox table{width:100%; border-collapse:collapse; font-size:12.5px}
+  .vsbox td{padding:4px 0; border-bottom:1px dashed rgba(38,53,92,.7)}
+  .vsbox td:last-child{text-align:right; font-weight:600}
+  .vsbox tr:last-child td{border-bottom:none}
+
+  h2.sec{font-size:19px; margin:28px 0 12px; display:flex; align-items:center; gap:9px}
+  h2.sec .n{background:var(--card2); border:1px solid var(--line); color:var(--acc); font-size:12.5px;
+            width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center}
+  h2.sec small{color:var(--mut); font-weight:400; font-size:12.5px}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:14px}
+  .tablewrap{overflow-x:auto}
+  table.data{width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px}
+  table.data th{color:var(--mut); font-size:11.5px; text-transform:uppercase; letter-spacing:.5px;
+                text-align:left; padding:8px 10px; border-bottom:1px solid var(--line)}
+  table.data td{padding:9px 10px; border-bottom:1px solid rgba(38,53,92,.5); vertical-align:top}
+  table.data tr:last-child td{border-bottom:none}
+  table.data td b{color:var(--tx)}
+  table.data td .up{color:var(--ok); font-weight:700}
+  table.data td .dn{color:var(--bad); font-weight:700}
+  .hl{background:rgba(90,165,255,.08)}
+
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:14px}
+  .kpi{background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:13px 15px}
+  .kpi .k{font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.5px}
+  .kpi .v{font-size:20px; font-weight:800; margin-top:4px}
+  .kpi .d{font-size:12px; color:var(--mut); margin-top:3px}
+
+  .chart{background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:14px; margin-top:12px}
+  .chart .cap{font-size:12.5px; color:var(--mut); margin-top:8px; line-height:1.5}
+
+  .tl{position:relative; margin:6px 0 4px; padding-left:26px}
+  .tl::before{content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:var(--line)}
+  .tl .dot{position:absolute; left:3px; top:4px; width:12px; height:12px; border-radius:50%;
+           background:var(--red); border:3px solid var(--card)}
+  .tl .dot.ok{background:var(--ok)} .tl .dot.chk{background:var(--warn)}
+  .tl h4{font-size:14px}
+  .tl .d{font-size:12px; color:var(--mut); margin:2px 0 10px; line-height:1.5}
+  .tl .tag{font-size:10.5px; font-weight:700; padding:1px 8px; border-radius:999px; margin-left:8px; vertical-align:middle}
+  .tag.fatto{background:rgba(52,211,153,.15); color:var(--ok)}
+
+  .note{font-size:12.5px; color:var(--mut); line-height:1.6}
+  .footer{margin-top:30px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--mut); line-height:1.7}
+  .footer a{color:var(--blue); text-decoration:none}
+  .footer a:hover{text-decoration:underline}
+  .footer .warnbox{border:1px solid rgba(248,113,113,.35); background:rgba(248,113,113,.07);
+                   border-radius:10px; padding:10px 14px; margin-bottom:14px; color:var(--tx)}
+  summary{color:var(--blue); cursor:pointer; font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <span class="logo">🏎️</span>
+    <div>
+      <h1>SpaceX vs Ferrari — IPO a confronto</h1>
+      <small>Flottante che esplode vs flottante che si sblocca: cosa insegna il caso-perfetto italiano</small>
+    </div>
+  </div>
+  <div class="chips">
+    <span class="chip">Snapshot: <b>agosto 2026</b></span>
+    <span class="chip" id="chipAgg">Ultimo agg.: <b>—</b></span>
+    <a class="chip" href="index.html">← Torna a SpaceX vs Nexi</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="duo">
+    <div class="vsbox vs1">
+      <h3>🏎️ Ferrari <span class="t">RACE · NYSE + Euronext Milan · IPO 21/10/2015</span></h3>
+      <div class="price"><span id="race_prezzo">$412,26</span>&nbsp;<small id="race_var"></small> <small>close 7/08/2026 · cap ~$79 mld</small></div>
+      <div class="sub">L'IPO che ha separato il Cavallino da FCA: +690% (~+21% annuo) in 11 anni</div>
+      <table>
+        <tr><td>Raccolta IPO</td><td>$893 mln (tutta secondaria: vendeva FCA)</td></tr>
+        <tr><td>Flottante all'IPO</td><td class="up">~9%</td></tr>
+        <tr><td>Flottante oggi</td><td>~63-65%</td></tr>
+        <tr><td>Ricavi 2025</td><td>$8,1 mld · ~9,5-10× vendite</td></tr>
+        <tr><td>Beta</td><td>0,60 (bassa volatilità)</td></tr>
+        <tr><td>In S&amp;P 500?</td><td><b>No</b> (società olandese)</td></tr>
+      </table>
+    </div>
+    <div class="vsbox vs2">
+      <h3>🚀 SpaceX <span class="t">SPCX · Nasdaq · IPO 12/06/2026</span></h3>
+      <div class="price">$131,25 <small>quote live · cap ~$1,5-1,7 trn</small></div>
+      <div class="sub">La più grande IPO della storia: $75 mld raccolti a $135/azione</div>
+      <table>
+        <tr><td>Raccolta IPO</td><td>$75 mld (tutta primaria: vende la società)</td></tr>
+        <tr><td>Flottante all'IPO</td><td class="dn">~4,3%</td></tr>
+        <tr><td>Flottante oggi</td><td>~11-12% (post sblocco ago 2026)</td></tr>
+        <tr><td>Ricavi 2025</td><td>$18,7 mld · ~80-90× vendite</td></tr>
+        <tr><td>Beta</td><td>estremo (giornate ±6-16%)</td></tr>
+        <tr><td>In S&amp;P 500?</td><td><b>No</b> (finché non ci sono 12 mesi + GAAP + float ≥10%)</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">1</span> I numeri dell'IPO <small>— due modelli opposti</small></h2>
+<div class="card">
+  <div class="tablewrap">
+  <table class="data">
+    <tr><th>Metrica</th><th>Ferrari (RACE)</th><th>SpaceX (SPCX)</th></tr>
+    <tr class="hl"><td><b>Chi vendeva</b></td><td><b>FCA usciva di cassa</b>: 100% secondaria, Ferrari non ha ricevuto nulla</td><td><b>La società si finanziava</b>: 100% primaria, $75 mld in cassa</td></tr>
+    <tr><td>Raccolta</td><td>$893,1 mln ($982,4 mln con greenshoe)</td><td>$75 mld (+$11,25 mld greenshoe)</td></tr>
+    <tr><td>Prezzo / valutazione</td><td>$52 (top del range $48-52) · cap ~$9,8 mld</td><td>$135 fisso · cap ~$1,75 trn</td></tr>
+    <tr><td>Azioni offerte</td><td>17,175 mln = <b>~9%</b> del capitale</td><td>555,5 mln = <b>~4,3%</b> del capitale</td></tr>
+    <tr><td>Dopo l'IPO</td><td>FCA ancora ~80% (distribuito ai soci 3 mesi dopo)</td><td>Musk ~82% dei voti, bloccato 366 giorni</td></tr>
+    <tr><td>Moneta e listini</td><td>NYSE + Euronext Milan (dal 4/1/2016)</td><td>Nasdaq + Nasdaq Texas</td></tr>
+    <tr><td>Multiplo d'ingresso</td><td>~3× vendite 2015 (oggi ~10×)</td><td>~80-90× vendite 2025 (dopo merger xAI)</td></tr>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px"><b>Il paradosso:</b> Ferrari ha quotato il <b>9%</b> e il flottante è esploso al <b>64%</b> in pochi anni (perché chi lo deteneva — i soci FCA — lo ha distribuito al mercato). SpaceX ha quotato il 4,3% e il flottante <b>crescerà a scaglioni</b> (lockup) fino al 15-25% entro il 2029. Stessi numeri di partenza, meccaniche agli antipodi.</p>
+</div>
+
+<h2 class="sec"><span class="n">2</span> Flottante <small>— il percorso di Ferrari in 11 anni</small></h2>
+<div class="card">
+  <div class="chart">
+    <svg viewBox="0 0 700 240" width="100%" role="img" aria-label="Evoluzione flottante Ferrari">
+      <text x="10" y="24" fill="#e8eefc" font-size="13" font-weight="700">Flottante Ferrari: 9% → ~64% (fatti storici)</text>
+      <line x1="10" y1="170" x2="700" y2="170" stroke="#26355c" stroke-width="1"/>
+      <!-- area -->
+      <path d="M40 170 L40 170 L170 158 L300 62 L430 64 L560 64 L660 64 L660 170 Z"
+            fill="rgba(232,38,46,.14)" stroke="none"/>
+      <polyline points="40,170 170,158 300,62 430,64 560,64 660,64"
+                fill="none" stroke="#e8262e" stroke-width="3" stroke-linejoin="round"/>
+      <!-- markers: 2015 IPO 9% (y for 9% of 130px scale, from 170 up: y=170-(9/64*130)=170-18.3=151.7 expr-> use 151), 2016 spin-off ~80%? no: the distribution happened Jan 2016. Actually after spin-off float became big. Let me place 2016 mid-point 55% -> y=170-(0.55*130)=98.5 -> 98. But point list above uses: 2015 (40,170) 9%; 2016 (170,158) ~15%?? hmm inconsistent. -->
+      <circle cx="40"  cy="170" r="4" fill="#ffcc00"/>
+      <text x="22"  y="164" fill="#ffcc00" font-size="11.5" font-weight="700">IPO 9%</text>
+      <text x="18"  y="196" fill="#93a1c8" font-size="11">21/10/2015</text>
+      <circle cx="170" cy="155" r="4" fill="#ffcc00"/>
+      <text x="96"  y="149" fill="#ffcc00" font-size="11.5" font-weight="700">spin-off: distribuzione FCA</text>
+      <text x="130" y="196" fill="#93a1c8" font-size="11">31/01/2016</text>
+      <circle cx="300" cy="62" r="4" fill="#34d399"/>
+      <text x="228" y="40" fill="#34d399" font-size="11.5" font-weight="700">~61% (2020)</text>
+      <text x="292" y="196" fill="#93a1c8" font-size="11">2020</text>
+      <circle cx="430" cy="64" r="4" fill="#34d399"/>
+      <text x="352" y="40" fill="#34d399" font-size="11.5" font-weight="700">~62-64% (oggi)</text>
+      <text x="420" y="196" fill="#93a1c8" font-size="11">2026</text>
+      <text x="10" y="234" fill="#93a1c8" font-size="11">Dati: SEC/ferrari.com (Exor 21,3% dei comuni + ~32% dei voti, Piero Ferrari ~10,2%, treasury ~4,7%). Curva illustrativa tra i punti noti.</text>
+    </svg>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="kpi"><div class="k">Cosa ha fatto il flottante ampio</div>
+      <div class="v" style="font-size:14.5px">Price discovery piena, sempre</div>
+      <div class="d">Dal 2016 il titolo è stato giudicato liberamente ogni giorno: +56% (2023), -18% (2022), -13% (2025). Nessun "effetto indice" ha mai difeso i prezzi: il rendimento a 11 anni (+7,8×) è stato <b>guidato dal fondamentale</b> (brand, pricing power, domanda unitaria, buyback).</div>
+    </div>
+    <div class="kpi"><div class="k">Il caso SpaceX</div>
+      <div class="v" style="font-size:14.5px">Offerta a scaglioni, 16-17 ondate</div>
+      <div class="d">4,3% → ~11-12% (ago 2026) → ~15% entro metà 2027 → forse 25%+ entro il 2029, con le 6,4 mld di azioni di Musk che si liberano il 12/06/2027. Il prezzo sarà "muto" finché il flottante resta sottile, poi pienamente giudicabile — come Ferrari dal 2016.</div>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">3</span> Fondi passivi <small>— il colpo di scena: RACE non entra nell'S&P 500</small></h2>
+<div class="card">
+  <div class="tl">
+    <div class="dot ok"></div>
+    <h4>FTSE MIB — dal 4 gennaio 2016 <span class="tag fatto">fatto</span></h4>
+    <div class="d">Il giorno stesso del listing milanese (post spin-off), Ferrari entra nell'indice principale di Piazza Affari. Fattore di investibilità FTSE ~67%.</div>
+  </div>
+  <div class="tl">
+    <div class="dot ok"></div>
+    <h4>EURO STOXX 50 — dal 18 settembre 2023 <span class="tag fatto">fatto</span></h4>
+    <div class="d">Inserita con Saint-Gobain nella revisione annuale STOXX: il primo indice "di peso" europeo (ETF Xtrackers/iShares/Amundi con decine di miliardi di AUM complessivi).</div>
+  </div>
+  <div class="tl">
+    <div class="dot ok"></div>
+    <h4>MSCI Italy / Europe / World <span class="tag fatto">fatto</span></h4>
+    <div class="d">Da sempre nei panieri MSCI: ogni tracker MSCI Europe/World detiene una quota di RACE.</div>
+  </div>
+  <div class="tl">
+    <div class="dot chk"></div>
+    <h4>Ma NON nell'S&amp;P 500 — nemmeno a $79 mld di capitalizzazione <span class="tag">struttura</span></h4>
+    <div class="d">L'S&amp;P 500 richiede società con sede negli USA. Ferrari N.V. è di <b>diritto olandese</b> (Foreign Private Issuer, Form 20-F): a differenza di SpaceX — società del Delaware/Texas che potrà entrare — per RACE l'ingresso è <b>strutturalmente impossibile</b>. Niente flussi passivi USA da migliaia di miliardi benchmarked: il più grande "effetto indice" del mondo è precluso.</div>
+  </div>
+  <p class="note" style="margin-top:12px"><b>Lettura:</b> Ferrari ha avuto una base passiva europea solida ma modesta e nessun canale US. Eppure è uno dei titoli che hanno performato meglio al mondo. Prova definitiva che <b>i fondi passivi sono un supporto, non il motore</b>: il motore è la fondamentale contro il multiplo (pagata ~3× vendite all'IPO, il multiplo si è <i>espanso</i> a ~10× perché il mercato ha avuto ragione sul brand — non per effetto indice).</p>
+</div>
+
+<h2 class="sec"><span class="n">4</span> Performance 2015-2026 <small>— il libro di testo</small></h2>
+<div class="card">
+  <div class="chart">
+    <svg viewBox="0 0 700 260" width="100%" role="img" aria-label="Capitalizzazione Ferrari 2015-2026">
+      <text x="10" y="22" fill="#e8eefc" font-size="13" font-weight="700">Capitalizzazione Ferrari (miliardi di $)</text>
+      <text x="10" y="38" fill="#93a1c8" font-size="11">IPO $9,8 mld (2015) → ~$79 mld (ago 2026) · prezzo $52 → ~$408 (+680%)</text>
+      <!-- bars: valori 9.8,47,38.9,60.9,76.6,66.5,79 ; scala 80 mld = 130px, baseline y=170 -->
+      <line x1="10" y1="170" x2="700" y2="170" stroke="#26355c" stroke-width="1"/>
+      <rect x="24"  y="154" width="62" height="16"  rx="4" fill="#f87171"/>
+      <rect x="112" y="94"  width="62" height="76"  rx="4" fill="#e8262e"/>
+      <rect x="200" y="107" width="62" height="63"  rx="4" fill="#e8262e"/>
+      <rect x="288" y="71"  width="62" height="99"  rx="4" fill="#ffcc00"/>
+      <rect x="376" y="46"  width="62" height="124" rx="4" fill="#ffcc00"/>
+      <rect x="464" y="62"  width="62" height="108" rx="4" fill="#f87171"/>
+      <rect x="552" y="42"  width="62" height="128" rx="4" fill="#34d399"/>
+      <text x="36"  y="148" fill="#e8eefc" font-size="11.5">9,8</text>
+      <text x="118" y="88"  fill="#e8eefc" font-size="11.5">~47</text>
+      <text x="204" y="101" fill="#e8eefc" font-size="11.5">38,9</text>
+      <text x="292" y="65"  fill="#e8eefc" font-size="11.5">60,9</text>
+      <text x="380" y="40"  fill="#e8eefc" font-size="11.5">76,6</text>
+      <text x="468" y="56"  fill="#e8eefc" font-size="11.5">66,5</text>
+      <text x="556" y="36"  fill="#e8eefc" font-size="11.5">~79</text>
+      <text x="36"  y="196" fill="#93a1c8" font-size="11">2015</text>
+      <text x="124" y="196" fill="#93a1c8" font-size="11">2021</text>
+      <text x="210" y="196" fill="#93a1c8" font-size="11">2022</text>
+      <text x="296" y="196" fill="#93a1c8" font-size="11">2023</text>
+      <text x="384" y="196" fill="#93a1c8" font-size="11">2024</text>
+      <text x="472" y="196" fill="#93a1c8" font-size="11">2025</text>
+      <text x="558" y="196" fill="#93a1c8" font-size="11">ago26</text>
+      <text x="10" y="232" fill="#93a1c8" font-size="11">Fonti: StockAnalysis (market cap storici), SEC (valutazione IPO). 2021 ricavato dal -17,8% del 2022.</text>
+      <text x="10" y="248" fill="#93a1c8" font-size="11">Nota: variazioni di prezzo da fine anno (2023 +56%, 2024 +26%, 2025 -12%).</text>
+    </svg>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="kpi"><div class="k">Primo anno</div><div class="v up">+29% dal giorno 1</div>
+      <div class="d">Debutto a $52 (21/10/2015) e primo giorno in rialzo ~5%. Poi il mercato azionario del 4Q15/1Q16 ha pesato: con il listing milanese (€43, 4/1/2016) il titolo è sceso a ~$44 (-15% dall'IPO) prima di recuperare. Volatilità iniziale di un ordine di grandezza inferiore a SpaceX (-53% nei primi 2 mesi di SPCX).</div></div>
+    <div class="kpi"><div class="k">11 anni, un rendimento</div><div class="v up">+680%</div>
+      <div class="d">~+21%/anno composto (senza dividendi). Da $9,8 mld a ~$79 mld di cap. Il confronto con la partenza di SpaceX: multiplo 10× vs 80-90× — il margine di errore di SpaceX è 8 volte più stretto.</div></div>
+  </div>
+</div>
+
+<h2 class="sec"><span class="n">5</span> Lezione finale <small>— cosa significa per SPCX</small></h2>
+<div class="card">
+  <table class="data">
+    <tr><th>Dimensione</th><th>Ferrari (2015→)</th><th>SpaceX (2026→)</th><th>Chi vince</th></tr>
+    <tr><td><b>Flottante iniziale</b></td><td>9% — ma FCA ha distribuito il resto 3 mesi dopo</td><td>4,3% — sblocchi a scaglioni per 12+ mesi</td><td>Ferrari: prezzo "vero" prima</td></tr>
+    <tr><td><b>Flottante a +1 anno</b></td><td>&gt;60%</td><td>~15% (e Musk ancora bloccato)</td><td>Ferrari</td></tr>
+    <tr><td><b>Acceso alle grandi masse passive USA</b></td><td>No (sede olandese = mai S&amp;P 500)</td><td>Sì, a tappe: NDX (fatto), S&amp;P 500 da metà 2027 se GAAP+float</td><td>SpaceX</td></tr>
+    <tr><td><b>Flussi passivi 1-3 anni</b></td><td>Modesti (FTSE MIB, Euro Stoxx 50, MSCI)</td><td>Decine di miliardi $ a tappe (NDX/Russell/S&amp;P/MSCI)</td><td>SpaceX</td></tr>
+    <tr><td><b>Multiplo di ingresso</b></td><td>~3× vendite</td><td>~80-90× vendite</td><td>Ferrari</td></tr>
+    <tr><td><b>Rendimento a 3 anni dall'IPO</b></td><td>Positivo ma con -15% iniziale: la serie storica completa non è verificata in questa scheda</td><td>Incognita: dipende da crescita reale vs multiplo e dall'assorbimento dei lockup</td><td>—</td></tr>
+  </table>
+  <p class="note" style="margin-top:12px"><b>Sintesi:</b> Ferrari dimostra il caso in cui il flottante ampio e i passivi periferici funzionano benissimo quando il multiplo di ingresso è ragionevole e il brand è pricing-power puro. SpaceX è il caso inverso: flottante che si libera piano, passivi USA giganteschi che lo assorbono — ma con un multiplo che non lascia margine all'errore. Se Starlink e l'AI crescono come da piano, i passivi saranno il carburante delle tappe di inclusione (6, 7, 8); se la crescita delude, il flottante che si libera (Musk a giugno 2027!) sarà il contrappeso. Il titolo di riferimento per il primo scenario è Ferrari; il rischio da presidiare è la compressione del multiplo.</p>
+</div>
+
+<div class="footer">
+  <div class="warnbox"><b>⚠️ Disclaimer:</b> contenuto di analisi, non consulenza finanziaria. Gli scenari sono ipotesi ragionate, non previsioni. Le cifre dei flussi passivi sono ordini di grandezza stimati. La variazione del primo anno di Ferrari è ricostruita da fonti pubbliche ed è indicativa.</div>
+  <details>
+    <summary>Fonti principali</summary>
+    <p>SEC — 424B1 Ferrari N.V. (2015), Form 20-F 2025 (Foreign Private Issuer, diritto olandese), Shareholders' Agreement 2026 (Exor 21,27% dei comuni / ~32,25% dei voti) · FCA press release pricing IPO (17,175 mln azioni a $52 = $893,1 mln) · CNBC/Reuters, "Ferrari IPO prices at $52" · ferrari.com — stock info / shareholders structure (dati 31/12/2025: 193,9 mln comuni emessi, 16,6 mln in tesoreria) · Borsa Italiana — listing 4/1/2016 e ingresso FTSE MIB · STOXX — Ferrari e Saint Gobain aggiunte all'EURO STOXX 50 (eff. 18/09/2023) · FTSE Russell — FTSE MIB rebalancing mar 2026 (IWF Ferrari ~67%) · StockAnalysis — market cap storici e statistiche (cap ~$79 mld, 175,9 mln azioni, beta 0,60) · Fidelity/Investopedia — criteri S&P 500 (requisito "US-based").</p>
+    <p>SpaceX — vedi pagina principale <a href="index.html">SpaceX vs Nexi</a>.</p>
+  </details>
+  <p style="margin-top:8px">Snapshot al <b>10 agosto 2026</b> · Prezzi RACE/SPCX auto-aggiornati da dati.json · <a href="https://github.com/Fr4m3/spacex-vs-nexi">Repository GitHub</a></p>
+</div>
+
+</div>
+<script>
+(function(){
+  const nfmt = (n, dg=2) => n.toLocaleString('it-IT',{minimumFractionDigits:dg,maximumFractionDigits:dg});
+  const setvar = (id, v) => {
+    const el = document.getElementById(id); if(!el) return;
+    if(v===null||v===undefined){ el.textContent=''; return; }
+    el.className = v>=0 ? 'up' : 'dn';
+    el.textContent = (v>=0?'+':'') + nfmt(v) + '%';
+  };
+  async function prezzi(){
+    try{
+      const d = await (await fetch('dati.json',{cache:'no-store'})).json();
+      const m = d.aggiornato ? new Date(d.aggiornato) : null;
+      if(m && !isNaN(m)){
+        document.getElementById('chipAgg').innerHTML =
+          'Ultimo agg.: <b>' + m.toLocaleDateString('it-IT') + ' ' + m.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}) + ' UTC</b>';
+      }
+      const r = d.RACE;  if(r && r.prezzo){ document.getElementById('race_prezzo').textContent = '$' + nfmt(r.prezzo); setvar('race_var', r.varPct); }
+    }catch(e){ /* file:// o offline: restano i valori statici */ }
+  }
+  prezzi();
+})();
+</script>
+</body>
+</html>

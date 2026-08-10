@@ -1,0 +1,13 @@
+Oggetto: Istruzioni: abilita lo scope "workflow" sul token GitHub
+
+Ciao! Serve un passaggio da te per completare l'aggiornamento automatico dei prezzi della pagina (https://fr4m3.github.io/spacex-vs-nexi/). Il token GitHub attuale non ha lo scope "workflow", quindi GitHub rifiuta il caricamento del workflow.
+
+PASSI (2 minuti):
+1) Apri https://github.com/settings/tokens
+2) Clicca sul token classico attuale (scopes attuali: gist, read:org, repo)
+3) Nella sezione "Select scopes" spunta la casella "workflow"
+   (per i token classici NON serve rigenerare il token: la modifica vale subito)
+4) Scorri in basso e premi "Update token"
+5) Torna nella chat e scrivi "fatto"
+
+Dopo il tuo "fatto" io carico il workflow e lancio un run di test per verificare che i prezzi (SPCX, NEXI.MI, RACE) si aggiornino da soli ogni giorno alle 22:00 UTC. Grazie!

@@ -6,10 +6,10 @@
     "time": 1788552000
   },
   "NEXI.MI": {
-    "prezzo": 4.277,
-    "precedente": 4.417,
-    "varPct": -3.17,
-    "time": 1788536106
+    "prezzo": 4.214,
+    "precedente": 4.403,
+    "varPct": -4.29,
+    "time": 1788795313
   },
   "RACE": {
     "prezzo": 409.95,
@@ -17,5 +17,5 @@
     "varPct": -2.52,
     "time": 1788552002
   },
-  "aggiornato": "2026-09-06T23:29:59Z"
+  "aggiornato": "2026-09-07T23:59:56Z"
 }

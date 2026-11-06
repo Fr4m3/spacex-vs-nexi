@@ -1,21 +1,21 @@
 {
   "SPCX": {
-    "prezzo": 135.92,
-    "precedente": 145.23,
-    "varPct": -6.41,
-    "time": 1793826000
+    "prezzo": 123.62,
+    "precedente": 143.89,
+    "varPct": -14.09,
+    "time": 1793912401
   },
   "NEXI.MI": {
-    "prezzo": 4.644,
-    "precedente": 4.391,
-    "varPct": 5.76,
-    "time": 1793810101
+    "prezzo": 4.668,
+    "precedente": 4.387,
+    "varPct": 6.41,
+    "time": 1793896584
   },
   "RACE": {
-    "prezzo": 432.45,
-    "precedente": 393.44,
-    "varPct": 9.92,
-    "time": 1793826002
+    "prezzo": 422.4,
+    "precedente": 399.77,
+    "varPct": 5.66,
+    "time": 1793912402
   },
-  "aggiornato": "2026-11-05T01:59:38Z"
+  "aggiornato": "2026-11-06T01:59:22Z"
 }
